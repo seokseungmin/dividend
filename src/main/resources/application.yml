@@ -8,6 +8,14 @@ spring:
     username: sa  # 데이터베이스 사용자 이름
     password:  # 데이터베이스 비밀번호
 
+  redis:
+    host: localhost
+    port: 6379
+
+  jwt:
+    secret: emVyb2Jhc2Utc3ByaW5nLWJvb3QtZGl2aWRlbmQtcHJvamVjdC10dXRvcmlhbC1qd3Qtc2VjcmV0LWtleQ==
+    # "zerobase-spring-boot-dividend-project-tutorial-jwt-secret-key"
+
   jpa:
     hibernate:
       ddl-auto: create

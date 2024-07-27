@@ -1,7 +1,9 @@
 package zerobase.dividend.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //@Getter
 //@Setter
@@ -9,7 +11,8 @@ import lombok.Data;
 //@EqualsAndHashCode
 //@RequiredArgsConstructor
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Company {
     private String ticker;
     private String name;

@@ -19,30 +19,27 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    public static final String TOKEN_HEADER = "Authorization";
+    public static final String TOKEN_PREFIX = "Bearer ";
 
-    public static final String TOKEN_HEADER = "Authorization"; // 토큰은 http protocol에서 헤더에 포함됨
-    public static final String TOKEN_PREFIX = "Bearer "; // 인증 타입, jwt는 토큰 앞에 Bearer을 붙임
-
-    private final TokenProvider tokenProvider; // 토큰이 유효한지 확인하기 위해
+    private final TokenProvider tokenProvider;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = this.resolveTokenFromRequest(request);
-
-        // 토큰이 유효한지 확인
+        //토큰 유효성 검증
         if (StringUtils.hasText(token) && this.tokenProvider.validateToken(token)) {
             Authentication auth = this.tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
+
+            log.info(String.format("[%s] -> %s", this.tokenProvider.getUsername(token), request.getRequestURI()));
         }
 
-        // 필터가 연속적으로 실행되게
         filterChain.doFilter(request, response);
     }
 
-    // 토큰이 있는지 확인
     private String resolveTokenFromRequest(HttpServletRequest request) {
         String token = request.getHeader(TOKEN_HEADER);
-
         if (!ObjectUtils.isEmpty(token) && token.startsWith(TOKEN_PREFIX)) {
             return token.substring(TOKEN_PREFIX.length());
         }

@@ -20,37 +20,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TokenProvider {
 
-    private static final long TOKEN_EXPIRE_TIME = 1000 * 60 * 60; // 1 hour
+    private static final long TOKEN_EXPIRE_TIME = 1000 * 60 * 60;   //총 1시간
     private static final String KEY_ROLES = "roles";
+
     private final MemberService memberService;
 
-    @Value("${spring.jwt.secret}") // 수정된 부분
+    @Value("${spring.jwt.secret}")
     private String secretKey;
 
-    /**
-     * 토큰 생성(발급)
-     *
-     * @param username
-     * @param roles
-     * @return
+    /*
+        토큰 생성(발급)
      */
     public String generateToken(String username, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put(KEY_ROLES, roles);
 
-        var now = new Date(); // 수정된 부분
-        var expiredDate = new Date(now.getTime() + TOKEN_EXPIRE_TIME); // 수정된 부분
+        Date now = new Date();
+        Date expiredDate = new Date(now.getTime() + TOKEN_EXPIRE_TIME);
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setIssuedAt(now) // 토큰 생성 시간
-                .setExpiration(expiredDate) // 토큰 만료 시간
-                .signWith(SignatureAlgorithm.HS512, this.secretKey) // 사용할 암호화 알고리즘, 비밀키
+                .setIssuedAt(now)   //토큰 생성 시간
+                .setExpiration(expiredDate) //토큰 만료 시간
+                .signWith(SignatureAlgorithm.HS512, this.secretKey)    //사용할 암호화 알고리즘, 비밀키
                 .compact();
     }
 
     public Authentication getAuthentication(String jwt) {
-        UserDetails userDetails = this.memberService.loadUserByUsername(this.getUsername(jwt)); // 이름 가져오기
+        UserDetails userDetails = this.memberService.loadUserByUsername(this.getUsername(jwt));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
@@ -59,19 +56,19 @@ public class TokenProvider {
     }
 
     public boolean validateToken(String token) {
-        if (!StringUtils.hasText(token)) return false;
-
-        try {
-            var claims = this.parseClaims(token);
-            return !claims.getExpiration().before(new Date());
-        } catch (ExpiredJwtException e) {
+        if (!StringUtils.hasText(token)) {
             return false;
         }
+
+        Claims claims = this.parseClaims(token);
+
+        return !claims.getExpiration().before(new Date());
     }
 
     private Claims parseClaims(String token) {
         try {
-            return Jwts.parser().setSigningKey(this.secretKey).parseClaimsJws(token).getBody();
+            return Jwts.parser().setSigningKey(this.secretKey)
+                    .parseClaimsJws(token).getBody();
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }

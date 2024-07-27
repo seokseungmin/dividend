@@ -36,9 +36,17 @@ public class YahooFinanceScraper implements Scraper {
             Document document = connection.get();
 
             Elements parsingDivs = document.getElementsByClass("table yf-ewueuo");
-            Element tableElement = parsingDivs.get(0); //table 전체
+            if (parsingDivs.isEmpty()) {
+                throw new RuntimeException("No data found for company: " + company.getTicker());
+            }
 
-            Element tbody = tableElement.children().get(1); // thead(0) - tbody(1) - tfoot(2)
+            Element tableElement = parsingDivs.get(0); // table 전체
+            Elements tableChildren = tableElement.children();
+            if (tableChildren.size() < 2) {
+                throw new RuntimeException("Unexpected structure of the table for company: " + company.getTicker());
+            }
+
+            Element tbody = tableChildren.get(1); // thead(0) - tbody(1) - tfoot(2)
             List<Dividend> dividends = new ArrayList<>();
 
             for (Element e : tbody.children()) {
@@ -47,12 +55,12 @@ public class YahooFinanceScraper implements Scraper {
                     continue;
                 }
 
-                String[] spilts = txt.split(" ");
-                int month = Month.strToNumber(spilts[0]);
+                String[] splits = txt.split(" ");
+                int month = Month.strToNumber(splits[0]);
 
-                int day = Integer.valueOf(spilts[1].replace(",", ""));
-                int year = Integer.valueOf(spilts[2]);
-                String dividend = spilts[3];
+                int day = Integer.parseInt(splits[1].replace(",", ""));
+                int year = Integer.parseInt(splits[2]);
+                String dividend = splits[3];
 
                 if (month < 0) {
                     throw new RuntimeException("Unexpected Month enum value -> " + month);
@@ -75,9 +83,10 @@ public class YahooFinanceScraper implements Scraper {
         try {
             Document document = Jsoup.connect(url).get();
             Element titleElement = document.select("h1.yf-3a2v0c").first();
+            if (titleElement == null) {
+                throw new RuntimeException("No title found for ticker: " + ticker);
+            }
             String title = titleElement.text().split(" \\(")[0].trim();
-            // 3M Company (MMM)
-            // 3M Company
             return new Company(ticker, title);
         } catch (IOException e) {
             e.printStackTrace();

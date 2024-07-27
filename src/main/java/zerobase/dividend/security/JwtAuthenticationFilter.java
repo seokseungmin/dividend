@@ -27,12 +27,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = this.resolveTokenFromRequest(request);
-        //토큰 유효성 검증
         if (StringUtils.hasText(token) && this.tokenProvider.validateToken(token)) {
             Authentication auth = this.tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
-
-            log.info(String.format("[%s] -> %s", this.tokenProvider.getUsername(token), request.getRequestURI()));
+            log.info(String.format("User [%s] is making request to [%s]", this.tokenProvider.getUsername(token), request.getRequestURI()));
+        } else {
+            log.warn("JWT Token is not valid or not present");
         }
 
         filterChain.doFilter(request, response);
@@ -40,6 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String resolveTokenFromRequest(HttpServletRequest request) {
         String token = request.getHeader(TOKEN_HEADER);
+        log.info("Resolved Token: " + token); // 추가된 로그
         if (!ObjectUtils.isEmpty(token) && token.startsWith(TOKEN_PREFIX)) {
             return token.substring(TOKEN_PREFIX.length());
         }

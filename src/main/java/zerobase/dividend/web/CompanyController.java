@@ -1,6 +1,6 @@
 package zerobase.dividend.web;
-
 import lombok.AllArgsConstructor;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -8,9 +8,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import zerobase.dividend.model.Company;
+import zerobase.dividend.model.constants.CacheKey;
 import zerobase.dividend.persist.entity.CompanyEntity;
 import zerobase.dividend.service.CompanyService;
-
 
 @RestController
 @RequestMapping("/company")
@@ -18,9 +18,11 @@ import zerobase.dividend.service.CompanyService;
 public class CompanyController {
 
     private final CompanyService companyService;
+    private final CacheManager redisCacheManager;
 
     // 배당금 검색 - 자동완성 API
     @GetMapping("/autocomplete")
+    @PreAuthorize("hasRole('READ')")
     public ResponseEntity<?> autoComplete(@RequestParam String keyword) {
         //저장된 Trie에서 데이터를 가져오는 작업.
         var result = this.companyService.getCompanyNamesByKeyword(keyword);
@@ -35,12 +37,6 @@ public class CompanyController {
         return ResponseEntity.ok(companies);
     }
 
-    /**
-     * 회사 및 배당금 정보 추가
-     *
-     * @param request
-     * @return
-     */
     // 배당금 데이터 저장 API
     @PostMapping
     @PreAuthorize("hasRole('WRITE')")
@@ -59,8 +55,15 @@ public class CompanyController {
     }
 
     // 배당금 데이터 삭제 API
-    @DeleteMapping
-    public ResponseEntity<?> deleteCompany() {
-        return null;
+    @DeleteMapping("/{ticker}")
+    @PreAuthorize("hasRole('WRITE')")
+    public ResponseEntity<?> deleteCompany(@PathVariable String ticker) {
+        String companyName = this.companyService.deleteCompany(ticker);
+        this.clearFinanceCache(companyName);
+        return ResponseEntity.ok(companyName);
+    }
+
+    public void clearFinanceCache(String companyName) {
+        this.redisCacheManager.getCache(CacheKey.KEY_FINANCE).evict(companyName);
     }
 }

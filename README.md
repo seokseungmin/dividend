@@ -15,7 +15,9 @@
 - **Authentication**: JWT
 - **Utilities**: Lombok, Sl4J, Logback, Swagger
 
-## 📖 API Documentation
+## 📖 API Documentation 
+### [Swagger로 API 테스트](http://localhost:8080/swagger-ui/index.html)
+
 
 ### 🔐 /auth
 <details>

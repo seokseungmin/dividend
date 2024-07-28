@@ -92,5 +92,15 @@
 |![회사조회](https://github.com/user-attachments/assets/d99f6fa6-fdce-4dc0-ab79-3aaf6b48e1e4)|![회사추가](https://github.com/user-attachments/assets/f7b93202-eb4b-4b8a-90a5-ff56747148e9)|
 |회사 자동완성|배당금 조회|
 |![자동완성](https://github.com/user-attachments/assets/e4be95ef-ec9d-4801-9e11-df4f270a56af)|![배당금조회](https://github.com/user-attachments/assets/33b4fef4-b834-40c9-bbf3-8a633abd504a)|
-|Redis 캐시 저장|회사 삭제 & Redis 캐시 삭제|
-|![redis캐시](https://github.com/user-attachments/assets/4171494f-b3da-4d72-8cb9-8655c3c736f2)||
+
+## 🛑Redis
+
+|Redis 회사 캐시 저장|Redis 회사 캐시 삭제|
+|------|---|
+|![redis캐시](https://github.com/user-attachments/assets/4171494f-b3da-4d72-8cb9-8655c3c736f2)|![Redis캐시삭제](https://github.com/user-attachments/assets/6e48fec7-66d7-4f00-a879-139abf1573dd)
+
+## 🖥️H2 Console
+
+| 회원 정보 | 회원 역할 | 회사 조회 |
+|------|---|---|
+| ![멤버보기](https://github.com/user-attachments/assets/154d4bf0-4261-49da-a9b5-9dbdeb502237) | ![멤머역할](https://github.com/user-attachments/assets/e859294d-2e4f-4649-a34b-1332d5388a61) | ![회사조회](https://github.com/user-attachments/assets/88b6aecb-288b-4b76-aa52-230bd585d0dc) |

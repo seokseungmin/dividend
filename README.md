@@ -83,8 +83,7 @@
   - `{companyName : "좋은회사", dividend :[{date:"2023.10.29", price:"2.00", ...}]}`
 </details>
 
-## 🐱페이지별 상세 기능
-- ERD 시각화
+## 📮PostMan API 테스트
 
 |회원가입|로그인|
 |------|---|

@@ -13,7 +13,7 @@
 - **Databases**: H2, Redis
 - **Web Scraping**: Jsoup
 - **Authentication**: JWT
-- **Utilities**: Lombok, Sl4J, Logback
+- **Utilities**: Lombok, Sl4J, Logback, Swagger
 
 ## 📖 API Documentation
 

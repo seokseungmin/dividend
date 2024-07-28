@@ -32,13 +32,16 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .httpBasic(AbstractHttpConfigurer::disable)
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/signup", "/auth/signin", "/h2-console/**", "/company/**", "/finance/**")) // CSRF 비활성화
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/signup", "/auth/signin", "/h2-console/**", "/company/**", "/finance/**","/swagger-ui/**", "/v3/api-docs/**", "/api-docs/**")) // CSRF 비활성화
                 .sessionManagement(sessionManagementCustomizer ->
                         sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeHttpRequestsCustomizer ->
                         authorizeHttpRequestsCustomizer
                                 .requestMatchers("/auth/signup", "/auth/signin").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
+                                .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/v3/api-docs/**").permitAll()
+                                .requestMatchers("/api-docs/**").permitAll()
                                 .anyRequest().authenticated())
                 .headers(headers ->
                         headers.addHeaderWriter(

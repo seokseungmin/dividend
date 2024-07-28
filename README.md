@@ -82,3 +82,16 @@
   - 잘못된 회사명이 입력으로 들어온 경우 400 status 코드와 에러메세지 반환
   - `{companyName : "좋은회사", dividend :[{date:"2023.10.29", price:"2.00", ...}]}`
 </details>
+
+## 🐱페이지별 상세 기능
+- ERD 시각화
+
+|회원가입|로그인|
+|------|---|
+|![회원가입](https://github.com/user-attachments/assets/fb50cdd7-4df6-4386-aae1-a5b726e1f4f9)|![로그인](https://github.com/user-attachments/assets/7718eb31-4ee7-4a58-ba41-6bec7f6a733d)|
+|회사 조회|회사 저장|
+|![회사조회](https://github.com/user-attachments/assets/d99f6fa6-fdce-4dc0-ab79-3aaf6b48e1e4)|![회사추가](https://github.com/user-attachments/assets/f7b93202-eb4b-4b8a-90a5-ff56747148e9)|
+|회사 자동완성|배당금 조회|
+|![자동완성](https://github.com/user-attachments/assets/e4be95ef-ec9d-4801-9e11-df4f270a56af)|![배당금조회](https://github.com/user-attachments/assets/33b4fef4-b834-40c9-bbf3-8a633abd504a)|
+|Redis 캐시 저장|회사 삭제 & Redis 캐시 삭제|
+|![redis캐시](https://github.com/user-attachments/assets/4171494f-b3da-4d72-8cb9-8655c3c736f2)||

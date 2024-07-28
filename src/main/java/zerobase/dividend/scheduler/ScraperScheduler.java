@@ -61,6 +61,7 @@ public class ScraperScheduler {
                         // 존재하지 않은 경우에만 삽입
                         if (!exists) {
                             this.dividendRepository.save(e);
+                            log.info("insert new dividend -> " + e.toString());
                         }
                     });
 

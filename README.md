@@ -18,6 +18,9 @@
 ## 📖 API Documentation 
 ### [Swagger로 API 테스트](http://localhost:8080/swagger-ui/index.html)
 
+|Swagger|
+|------|
+![swagger](https://github.com/user-attachments/assets/71c90b2b-5295-4f83-87e9-71bf639566f7)
 
 ### 🔐 /auth
 <details>

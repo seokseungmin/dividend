@@ -106,7 +106,6 @@
 
 | 회원 정보 | 회원 역할 |
 |------------|-------------|
-| ![멤버보기](https://github.com/user-attachments/assets/154d4bf0-4261-49da-a9b5-9dbdeb502237) | ![멤머역할](https://github.com/user-attachments/assets/e859294d-2e4f-4649-a34b-1332d5388a61) |
+| ![멤버정보](https://github.com/user-attachments/assets/a50e6434-d013-45b6-a667-fc5b012c3882) | ![멤버역할](https://github.com/user-attachments/assets/ffdb55cf-6de0-4712-976e-1e8f9d49cb15) |
 | 회사 조회 | 배당금 조회 |
-| ![회사조회](https://github.com/user-attachments/assets/88b6aecb-288b-4b76-aa52-230bd585d0dc) | ![배당금조회](https://github.com/user-attachments/assets/14e53b45-b661-4209-8082-2e05ee104467) |
-
+| ![회사정보](https://github.com/user-attachments/assets/e479e5dd-793b-451c-8cfe-d03a9cb3af2c) | ![배당금](https://github.com/user-attachments/assets/d99ed97d-649e-4b7f-a9f9-7d2bd0a827ef) |

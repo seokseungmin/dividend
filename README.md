@@ -8,6 +8,7 @@
 ## 🛠️ Development Environment
 - 🖥️ **Intellij IDEA Ultimate**
 - ☕ **Java 17**
+- ☕ **Jdk 17**
 - 🔧 **Gradle 8.8**
 - 🌱 **Spring Boot 3.3.2**
 

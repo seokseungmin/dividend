@@ -2,6 +2,9 @@
 
 > 크롤링을 통해 주식 데이터를 가져와 배당금을 알아보는 프로젝트입니다.
 
+
+![Front-end](https://skillicons.dev/icons?i=idea,java,gradle,spring,git,redis)<br>
+
 ## 🛠️ Development Environment
 - 🖥️ **Intellij IDEA Ultimate**
 - ☕ **Java 17**

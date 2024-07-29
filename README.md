@@ -107,6 +107,8 @@
 |![redis캐시](https://github.com/user-attachments/assets/4171494f-b3da-4d72-8cb9-8655c3c736f2)|![Redis캐시삭제](https://github.com/user-attachments/assets/6e48fec7-66d7-4f00-a879-139abf1573dd)
 
 ## 🖥️H2 Console
+### [H2 Console로 DB 테스트](http://localhost:8080/h2-console/)
+
 
 | 회원 정보 | 회원 역할 |
 |------------|-------------|
